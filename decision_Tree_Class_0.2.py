@@ -7,14 +7,10 @@ class Decision_Tree:
 
     Tree = {}
 
-    def __init__(self, thr, dataset, feature_set):
-        self.threshold = thr
-        self.train_data = dataset
-        self.features = feature_set
+    def __init__(self, thr):
+        self.Threshold = thr
 
-        build_tree(self.train_data, self.features, Decision_Tree.Tree)
-
-    def get_max_key(in_list):
+    def get_max_key(self, in_list):
         flag = 0
         out_key = 0
         for i in range(len(in_list)):
@@ -24,7 +20,7 @@ class Decision_Tree:
 
         return out_key
 
-    def majority_decide(dataset, features):
+    def majority_decide(self, dataset, features):
         pos_value = features["label"]
         count_list = [0 for i in range(pos_value)]
 
@@ -32,10 +28,10 @@ class Decision_Tree:
             temp_num = dataset[item]["label"]
             count_list[temp_num] = count_list[temp_num] + 1
 
-        out_label = get_max_key(count_list)
+        out_label = self.get_max_key(count_list)
         return out_label
 
-    def count_igr(train_data, features):
+    def count_igr(self, train_data, features):
         features_name = []
         for key in features:
             features_name.append(key)
@@ -116,13 +112,13 @@ class Decision_Tree:
 
         return out_feature, out_IGR
 
-    def build_tree(train_data, features, decision_tree):
+    def build_tree(self, train_data, features, decision_tree):
         # 训练集要包含如下元素：特征名称和特征值，为一个列表嵌套字典
         # 特征集为一个字典，字典的键为特征名称和“label”，键值为该特征或标签的取值
         # 因为这个程序为一个递归程序，所以decision_tree这个传过来的参数
         # 可能仅仅是树的一个分支，经过ipython的test
         # python中的传值皆为对象，相当于一个引用
-
+        print(Decision_Tree.Tree)
         t1 = time.clock()
 
         ifequal = True
@@ -136,14 +132,14 @@ class Decision_Tree:
             return decision_tree
 
         if len(features) == 0:
-            this_1_label = majority_decide(train_data, features)
+            this_1_label = self.majority_decide(train_data, features)
             decision_tree.update({"no_feature": this_1_label})
             return decision_tree
 
-        feature, igr = count_igr(train_data, features)
+        feature, igr = self.count_igr(train_data, features)
 
-        if igr < self.threshold:
-            this_2_label = majority_decide(train_data, features)
+        if igr < self.Threshold:
+            this_2_label = self.majority_decide(train_data, features)
             decision_tree.update({"no_feature": this_2_label})
             return decision_tree
 
@@ -164,12 +160,12 @@ class Decision_Tree:
             processed_features.pop(feature)
 
             decision_tree[feature]
-            build_tree(processed_train_data, processed_features,
-                       decision_tree[feature][cnt])
+            self.build_tree(processed_train_data, processed_features,
+                            decision_tree[feature][cnt])
 
         t2 = time.clock()
         print("Time used: %f" % (t2 - t1))
 
-    def use_tree_predict(test_data):
+    def use_tree_predict(self, test_data):
         out_label = 0
         return out_label
