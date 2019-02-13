@@ -1,0 +1,38 @@
+<!-- <aiml version="1.0.1" encoding="UTF-8"> -->
+<aiml>
+    <!-- std-startup.xml -->
+ 
+    <!-- Category是一个自动的AIML单元 -->
+    <category>
+ 
+        <!-- Pattern用来匹配用户输入 -->
+        <!-- 如果用户输入 "LOAD AIML B" -->
+        <pattern>LOAD AIML B</pattern>
+ 
+        <!-- Template是模式的响应 -->
+        <!-- 这里学习一个aiml文件 -->
+        <template>
+            <learn>default.aiml</learn>
+            <learn>dialog.aiml</learn>
+            <learn>inappropriate.aiml</learn>
+            <learn>inquiry.aiml</learn>
+            <learn>insults.aiml</learn>
+            <learn>knowledge.aiml</learn>
+            <learn>personality.aiml</learn>
+            <learn>profanity.aiml</learn>
+            <learn>reductions_update.aiml</learn>
+            <learn>reductions1.aiml</learn>
+            <learn>reductions2.aiml</learn>
+            <learn>roman.aiml</learn>
+            <learn>that.aiml</learn>
+            <learn>train.aiml</learn>
+            <learn>udc.aiml</learn>
+            <learn>z_update.aiml</learn>
+            <learn>utilities.aiml</learn>
+            <!-- 你可以在这里添加更多的aiml文件 -->
+            <!-- <learn>more_aiml.aiml</learn> -->
+        </template>
+ 
+    </category>
+ 
+</aiml>
